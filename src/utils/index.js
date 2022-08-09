@@ -1,3 +1,4 @@
+
 /**
  * Created by PanJiaChen on 16/11/18.
  */
@@ -114,4 +115,51 @@ export function param2Obj(url) {
     }
   })
   return obj
+}
+
+/** *
+ *
+ *  将列表型的数据转化成树形数据 => 递归算法 => 自身调用自身 => 一定条件不能一样， 否则就会死循环
+ *  遍历树形 有一个重点 要先找一个头儿
+ * ***/
+// export function tranListToTreeData(list, rootValue) {
+//   var arr = []
+//   list.forEach(item => {
+//     if (item.pid === rootValue) {
+//       // 目标：找当前节点的亲儿子
+//       // 把当前的一级节点的id传入transData再进行判断，获取到当前一级节点对应的儿子
+//       const children = tranListToTreeData(list, item.id)
+//       if (children.length) {
+//         // 如果children的长度大于0 说明找到了子节点
+//         item.children = children
+//       }
+//       arr.push(item) // 将内容加入到数组中
+//     }
+//   })
+//   return arr
+// }
+
+export function transListToTreeData(list) {
+  // 构建号关系的数结构
+  const treeList = []
+
+  // 数组结构 >> map映射表 >>方便去数据不用遍历
+  const map = {}
+  list.forEach(item => {
+    // 如果当前项没有就给个空数组，防止报错
+    if (!item.children) {
+      item.children = []
+    }
+    map[item.id] = item
+  })
+  list.forEach(item => {
+  // 判断当前的遍历项是否有父节点
+    const parent = map[item.pid]
+    if (parent) {
+      parent.children.push(item)
+    } else {
+      treeList.push(item)
+    }
+  })
+  return treeList
 }

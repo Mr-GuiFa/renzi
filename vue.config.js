@@ -35,6 +35,13 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: {
+      '/api': { // 之间请求的路径
+        // 需要代理到线上服务器
+        target: 'http://42.192.129.12:3001', // 跨域请求的地址
+        changeOrgin: true
+      }
     }
   },
   configureWebpack: {

@@ -9,3 +9,8 @@ export default {
   name: 'App'
 }
 </script>
+<style>
+.el-dialog__header {
+    background: #66b1ff;
+}
+</style>

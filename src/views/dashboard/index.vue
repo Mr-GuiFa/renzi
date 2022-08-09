@@ -1,30 +1,32 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-  </div>
-</template>
+    <div class="app-container">
+      <h2>
+        员工
+      </h2>
+      <div><ImageUpload /></div>
+    </div></div></template>
 
 <script>
 import { mapGetters } from 'vuex'
-
+import { mixins } from '@/utils/mixins'
 export default {
   name: 'Dashboard',
-  computed: {
+  mixins: [mixins],
+  computed: [
     ...mapGetters([
       'name'
     ])
+  ],
+  mounted() {
+    this.hello()
+  },
+  created() {
+
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
+<style>
+
 </style>
